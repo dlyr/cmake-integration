@@ -229,6 +229,7 @@ performs SSL verification of not. Then it calls the `conan remote update
   "Select one of the available conan profiles and return the chosen one."
   (interactive)
   (let* ((all-profiles (ci--get-conan-available-profiles))
+         (completion-extra-properties `(:category conan-profile))
          (choice (completing-read "Conan profile: " all-profiles nil t)))
     (setq ci-conan-profile choice)))
 

@@ -181,19 +181,26 @@ depends on the target type."
      (t type))))
 
 
-(defun ci--target-annotation-function (target-name)
-  "Annotation function that takes a TARGET-NAME and return an annotation for it.
+(defun ci--target-annotation-suffix (target-name)
+  "Get the suffix to annotate TARGET-NAME."
+  (pcase (car (split-string target-name ci--multi-config-separator))
+    ("clean"  (propertize "Clean all compiled targets" 'face 'ci-phony-target-face))
+    ("all"  (propertize "Compile all targets" 'face 'ci-phony-target-face))
+    ("install"  (propertize "Install targets" 'face 'ci-phony-target-face))
+    (_  (ci--get-propertized-target-type-from-name target-name minibuffer-completion-table))))
 
-This is used in `cmake-integration--get-target-using-completions'
-when completing a target name to generate an annotation for that
-target, which is shown during the completions if you are using
-the marginalia package, or in Emacs standard completion buffer."
-  (let ((spaces (ci--get-annotation-initial-spaces target-name)))
-    (pcase (car (split-string target-name ci--multi-config-separator))
-      ("clean" (concat spaces (propertize "Clean all compiled targets" 'face 'ci-phony-target-face)))
-      ("all" (concat spaces (propertize "Compile all targets" 'face 'ci-phony-target-face)))
-      ("install" (concat spaces (propertize "Install targets" 'face 'ci-phony-target-face)))
-      (_ (concat spaces (ci--get-propertized-target-type-from-name target-name minibuffer-completion-table))))))
+
+(defun ci--target-affixation-function (targets)
+  "Affixation to be used during completion of TARGETS.
+
+This is used in `cmake-integration--get-target-using-completions' when
+completing target names to generate annotations for each target."
+  (mapcar
+   (lambda (target-name)
+     (let ((spaces (ci--get-annotation-initial-spaces target-name))
+           (suffix (ci--target-annotation-suffix target-name)))
+       (list target-name "" (concat spaces suffix))))
+   targets))
 
 
 (defun ci--target-completion-transformed (completion)
@@ -247,8 +254,8 @@ The grouping is done by the folder of the target."
   "Ask the user to choose one of the targets in LIST-OF-TARGETS using completions."
   (setq ci--list-of-targets list-of-targets)
   (let ((completion-extra-properties
-         `(:annotation-function
-           ci--target-annotation-function
+         `(:category cmake-target
+           :affixation-function ci--target-affixation-function
            :group-function ,ci-target-group-function)))
     (completing-read "Target: " list-of-targets nil t)))
 
