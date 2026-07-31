@@ -199,7 +199,7 @@ the marginalia package, or in Emacs standard completion buffer."
 (defun ci--target-completion-transformed (completion)
   "Transform function used during completion for COMPLETION."
   (if (equal completion ci-current-target)
-      (propertize completion 'face 'bold)
+      (propertize completion 'face 'success)
     completion)
   )
 
