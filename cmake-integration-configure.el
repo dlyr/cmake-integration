@@ -47,6 +47,7 @@
   "Select a CMake generator from the available ones in the system."
   (interactive)
   (let* ((all-generators (ci--get-available-generators))
+         (completion-extra-properties `(:category cmake-generator))
          (chosen-generator
           (completing-read "Select CMake generator: " all-generators nil t)))
     (setq ci-generator chosen-generator)))
@@ -151,6 +152,7 @@ The variable and its value are used when configuring the project with CMake."
   ;; Ask the user for a cache variable name and remove from the list. Use
   ;; completing-read.
   (let* ((var-names (mapcar 'car ci-cache-variables))
+         (completion-extra-properties `(:category cmake-cache-variable))
          (var-to-remove
           (completing-read "CMake Cache Variable to remove: " var-names nil t)))
     (setq ci-cache-variables

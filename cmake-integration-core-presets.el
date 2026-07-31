@@ -180,8 +180,8 @@ marginalia package, or in Emacs standard completion buffer."
          (display-name (alist-get 'displayName (alist-get preset minibuffer-completion-table nil nil 'equal)))
          (preset-annotation (concat initial-spaces display-name)))
     (if (equal preset "No Preset")
-        no-preset-annotation
-      preset-annotation)))
+        (propertize no-preset-annotation 'face 'completions-annotations)
+      (propertize preset-annotation 'face 'completions-annotations))))
 
 
 (defun ci-select-preset (all-presets prompt)
@@ -191,7 +191,8 @@ ALL-PRESETS is the list of all available presets. PROMPT is the prompt
 string for the `completing-read' function. Returns the selected preset
 or nil if \\='No Preset\\=' is selected."
   (let* ((collection (ci--prepare-for-completing-read all-presets))
-         (completion-extra-properties '(:annotation-function ci--annotation-from-displayName-function))
+         (completion-extra-properties '(:category cmake-preset
+                                        :annotation-function ci--annotation-from-displayName-function))
          (choice (completing-read prompt collection nil t)))
     (if (equal choice "No Preset")
         nil

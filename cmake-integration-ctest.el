@@ -139,6 +139,7 @@ This function is added to `cmake-integration-after-set-configure-preset-hook'."
 (defun ci--select-ctest-labels ()
   "Select and returns one or more ctest labels."
   (let* ((labels (ci--get-all-ctest-labels))
+         (completion-extra-properties `(:category ctest-label))
          (selected-labels (completing-read-multiple
                            "Select labels to include (separated by comma): "
                            labels nil t)))
