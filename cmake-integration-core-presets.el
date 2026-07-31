@@ -180,8 +180,8 @@ marginalia package, or in Emacs standard completion buffer."
          (display-name (alist-get 'displayName (alist-get preset minibuffer-completion-table nil nil 'equal)))
          (preset-annotation (concat initial-spaces display-name)))
     (if (equal preset "No Preset")
-        no-preset-annotation
-      preset-annotation)))
+        (propertize no-preset-annotation 'face 'completions-annotations)
+      (propertize preset-annotation 'face 'completions-annotations))))
 
 
 (defun ci-select-preset (all-presets prompt)
