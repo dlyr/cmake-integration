@@ -26,6 +26,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'project)
 (require 'cmake-integration-variables)
 (require 'cmake-integration-core)
 (require 'cmake-integration-configure)

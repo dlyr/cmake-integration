@@ -26,6 +26,8 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 's)
+(require 'cmake-integration-core)
 
 (defun ci--get-docs-folder ()
   "Get the folder with the Doxyfile."

@@ -33,7 +33,7 @@
 ;; activate the minor-mode accordingly.
 
 ;;; Code:
-
+(require 'project)
 (require 'cmake-integration-variables)
 
 

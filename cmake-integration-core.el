@@ -34,7 +34,8 @@
 (require 'cmake-integration-variables)
 
 
-
+(declare-function ci--get-preset-name "cmake-integration-core-presets")
+(declare-function ci--get-binaryDir-with-replacements "cmake-integration-configure")
 
 
 ;; BUG: This function seems to work correctly, but when used as the

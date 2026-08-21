@@ -26,7 +26,9 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 's)
 (require 'cmake-integration-logging)
+(require 'cmake-integration-core-presets)
 
 
 (defun ci-get-last-test-preset-name ()

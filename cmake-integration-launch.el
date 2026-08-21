@@ -27,6 +27,8 @@
 
 ;;; Code:
 
+(require 'cmake-integration-core)
+(require 'cmake-integration-build)
 (require 'cmake-integration-launch-functions)
 (require 'cmake-integration-logging)
 

@@ -27,6 +27,7 @@
 
 ;;; Code:
 (require 'tramp)
+(require 'cmake-integration-core-presets)
 
 ;; TODO: Add option to specify components -> use completing-read-multiple
 

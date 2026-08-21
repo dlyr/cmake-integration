@@ -26,13 +26,15 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'cmake-integration-variables)
+
 (defvar dape-configs)
 
 (defun ci--get-run-arguments-as-a-vector (&optional args)
   "Get arguments to pass to the binary as a vector of strings.
 
 If ARGS is not provided, use `cmake-integration-run-arguments'."
-  (let ((args (or args cmake-integration-run-arguments)))
+  (let ((args (or args ci-run-arguments)))
     (if args
         (vconcat (split-string args " " t))
       [])))

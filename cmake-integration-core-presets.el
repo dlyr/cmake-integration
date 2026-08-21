@@ -26,7 +26,9 @@
 ;;; Commentary:
 
 ;;; Code:
-
+(require 'dash)
+(require 'f)
+(require 'cmake-integration-core)
 
 (defun ci--get-system-presets-file ()
   "Get the path of the system presets file."

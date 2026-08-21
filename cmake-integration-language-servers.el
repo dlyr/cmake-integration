@@ -33,6 +33,7 @@
 
 ;;; Code:
 (require 'cmake-integration-configure)
+(require 'tramp)
 
 
 (defgroup cmake-integration-lsp nil
